@@ -7,20 +7,20 @@ class Node:
 class BST:
 	root = None
 
-	def addNode(self,element):
+	def addNode(self,root,element):
 		if(self.root == None):
 			self.root = Node(element)
 		else:
-			temp = self.root
-			while(temp.right != None and temp.left != None):
-				if(temp.data >= element):
-					temp = temp.left
+			if root.data < element:
+				if root.right is None: 
+					root.right = Node(element) 
 				else:
-					temp = temp.right
-			if(temp.data < element):
-				temp.right = Node(element)
+					self.addNode(root.right, element)
 			else:
-				temp.left = Node(element)
+				if root.left is None:
+					root.left = Node(element) 
+				else:
+					self.addNode(root.left, element)
 	
 	def inOrder(self,root):
 		if(root == None):
@@ -43,12 +43,12 @@ class BST:
 		self.postOrder(root.right)
 		print(root.data)
 	
-	def heightOfTree(self,root):
+	def getHeightOfTree(self,root):
 		if(root == None):
 			return 0
 		else:
-			left = self.heightOfTree(root.left)
-			right = self.heightOfTree(root.right)
+			left = self.getHeightOfTree(root.left)
+			right = self.getHeightOfTree(root.right)
 			if(left > right):
 				return left + 1
 			else:
@@ -57,11 +57,6 @@ class BST:
 
 if __name__ == '__main__':
 	obj = BST()
-	obj.addNode(3)
-	obj.addNode(2)
-	obj.addNode(1)
-	obj.addNode(4)
-	obj.addNode(5)
 	obj.inOrder(obj.root)
 	print("\nHeight of BST tree",obj.heightOfTree(obj.root))
 	
