@@ -17,9 +17,11 @@ class createTree:
 				obj.addNode(obj.root,l)
 			for r in right:
 				obj.addNode(obj.root,r)
-			obj.inOrder(obj.root)
-			print("Height of tree:",obj.getHeightOfTree(obj.root))
+			# obj.inOrder(obj.root)
+			# print("Height of tree:",obj.getHeightOfTree(obj.root))
 			return obj
+	def inOrder(self,obj):
+		obj.inOrder(obj.root)
 
 # if __name__ == '__main__':
 	# solution([1,2,3,4,5,6])

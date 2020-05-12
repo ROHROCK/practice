@@ -22,6 +22,9 @@ class BST:
 				else:
 					self.addNode(root.left, element)
 	
+	def getRoot(self):
+		return self.root
+
 	def inOrder(self,root):
 		if(root == None):
 			return
@@ -32,7 +35,7 @@ class BST:
 	def preOrder(self,root):
 		if(root == None):
 			return
-		print(root.data)	
+		print(root.data,end=" ")	
 		self.preOrder(root.left)
 		self.preOrder(root.right)
 	
