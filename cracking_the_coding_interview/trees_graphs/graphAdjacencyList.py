@@ -69,6 +69,15 @@ class Directed_Graph:
 				print(" -> {}".format(temp.vertex), end="") 
 				temp = temp.next
 			print(" \n")
+	def getEdges(self,nodeNumber):
+		head = self.graph[nodeNumber]
+		edges = []
+		if(head == None):
+			return None
+		while(head != None):
+			edges.append(head.vertex)
+			head = head.next
+		return edges
 
 # Driver program to the above graph class 
 if __name__ == "__main__": 
