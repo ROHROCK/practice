@@ -29,7 +29,7 @@ class BST:
 		if(root == None):
 			return
 		self.inOrder(root.left)
-		print(root.data,end=" ")
+		print(root.data)
 		self.inOrder(root.right)		
 
 	def preOrder(self,root):
