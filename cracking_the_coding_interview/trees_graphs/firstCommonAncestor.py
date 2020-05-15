@@ -1,5 +1,5 @@
 from tree import BST
-# from collections import deque
+from collections import deque
 
 class customNode:
 	parentNode = None
@@ -13,11 +13,10 @@ class customNode:
 def copyTree(root,customRoot):
 	if(root == None):
 		return None
-
 	if(root.left != None):
-		customRoot.left = customNode(root.left.data,root)
+		customRoot.left = customNode(root.left.data,customRoot)
 	if(root.right != None):
-		customRoot.right = customNode(root.right.data,root)
+		customRoot.right = customNode(root.right.data,customRoot)
 
 	copyTree(root.left,customRoot.left)
 	copyTree(root.right,customRoot.right)
@@ -30,12 +29,51 @@ def solution(root):
 	newTreeRoot = copyTree(root,newRoot)
 	return newRoot
 
+def findNode(root,key):
+	if(root == None):
+		print('Tree is empty')
+		return
+	queue = deque([])
+	queue.append(root)
+	while(len(queue) != 0):
+		currentNode = queue.popleft()
+		if(currentNode.data == key):
+			return currentNode
+		if(currentNode.left != None):
+			queue.append(currentNode.left)
+		if(currentNode.right != None):
+			queue.append(currentNode.right)
+	print("Key node not found !")
+	# exit()
+	return None
+
+def firstAncestor(target1 , target2):
+	routeTarget1 = []
+	target1 = target1.parentNode
+	while(target1 != None):
+		routeTarget1.append(target1)
+		target1 = target1.parentNode
+	while(target2 != None):
+		if(target2 in routeTarget1):
+			return target2
+		target2 = target2.parentNode
+	return None
+
 if __name__ == '__main__':
 	treeObj = BST()
-	numberList = [4,2,3,7,5,6]
+	numberList = [10,5,20,19,25]
 	for number in numberList:
 		treeObj.addNode(treeObj.root,number)
-	# treeObj.inOrder(treeObj.root)
 	newTreeRoot = solution(treeObj.root)
 	print('Special Tree')
 	treeObj.inOrder(newTreeRoot)
+	target1 = findNode(newTreeRoot,19)
+	target2 = findNode(newTreeRoot,25)
+	if(target1 == None):
+		print("key 1 is not found")
+		exit()
+	if(target2 == None):
+		print("Key 2 is not found")
+		exit()
+	ancestor = firstAncestor(target1,target2)
+	print("Ancestor: ",ancestor.data)
