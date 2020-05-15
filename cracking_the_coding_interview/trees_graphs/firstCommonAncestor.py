@@ -59,6 +59,21 @@ def firstAncestor(target1 , target2):
 		target2 = target2.parentNode
 	return None
 
+# considering both nodes contain in the tree 
+def recursiveOptimalSolution(root,target1,target2):
+	if(root == None):
+		return root
+	if(root.data == target1 or root.data == target2):
+		return root
+	leftPath = recursiveOptimalSolution(root.left,target1,target2)
+	rightPath = recursiveOptimalSolution(root.right,target1,target2)
+
+	if(leftPath == None):
+		return rightPath
+	if(rightPath == None):
+		return leftPath
+	return root
+
 if __name__ == '__main__':
 	treeObj = BST()
 	numberList = [10,5,20,19,25]
@@ -76,4 +91,6 @@ if __name__ == '__main__':
 		print("Key 2 is not found")
 		exit()
 	ancestor = firstAncestor(target1,target2)
-	print("Ancestor: ",ancestor.data)
+	# print("Ancestor: ",ancestor.data)
+	answer = recursiveOptimalSolution(treeObj.root,1,25)
+	print("Ancestor: ",answer.data)
