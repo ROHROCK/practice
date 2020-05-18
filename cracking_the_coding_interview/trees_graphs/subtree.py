@@ -3,28 +3,15 @@ from tree import BST
 #  total time complexity is O(n + m) where n is the total node in T1 
 # and m is the total nodes in T2
 def checkSubTree(root1,root2):
-	if(root1 == None):
-		return None
-	if(root2 == None):
-		return None
-	# check if the number of nodes are equal or not
-	if((root1.right == None and root2.right != None) or 
-	(root1.right != None and root2.right == None)):
-		return None
-	if((root1.left == None and root2.left != None) or 
-	(root1.left != None and root2.left == None)):
-		return None
-
-	# print(root1.data,root2.data)
-	# the check the data value
-	if(root1.data != root2.data):
-		return None
-	resLeft = checkSubTree(root1.left,root2.left)
-	resRight = checkSubTree(root1.right,root2.right)
-	if(resLeft == None or resRight == None):
+	if(root1 == None and root2 == None):
+		return True
+	elif(root1 == None or root2 == None):
 		return False
+	elif(root1.data != root2.data):
+		return False
+	else:
+		return checkSubTree(root1.left,root2.left) and checkSubTree(root1.right,root2.right)
 
-	return True
 def keyNodeInT1(root,key):
 	if root == None:
 		return None
