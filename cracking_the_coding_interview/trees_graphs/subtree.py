@@ -1,5 +1,7 @@
 from tree import BST
 
+#  total time complexity is O(n + m) where n is the total node in T1 
+# and m is the total nodes in T2
 def checkSubTree(root1,root2):
 	if(root1 == None):
 		return None
