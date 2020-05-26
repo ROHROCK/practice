@@ -9,8 +9,11 @@ class node:
 class tree:
 	total = 0
 	l = []
+	key = 0
+	path = []
 	def __init__(self):
 		self.root = None
+		self.path = []
 
 	def insertInOrder(self,listOfNodes):
 		listNodes = []
@@ -36,37 +39,55 @@ class tree:
 		# print(root)
 		q = []
 		q.append(root)
-		levelCnt = 0 
+		levelCnt = 0
 		while(len(q) != 0):
 			levelCnt = len(q)
 			while(levelCnt != 0):
 				currentNode = q.pop(0)
 				print(currentNode.data,end=' ')
+				# self.pathFromRoot(currentNode,[])
 				if currentNode.left != None:
 					q.append(currentNode.left)
 				if(currentNode.right != None):
 					q.append(currentNode.right)
 				levelCnt -= 1
 			print()
+		print('Answer: ',self.path)
 	
-	def pathFromRoot(self,root,l):
+	def pathFromNode(self,root):
 		if(root == None):
-			return None
-		l.append(root.data)
-		self.checkPath(l)
-		left = self.pathFromRoot(root.left,l)
-		right = self.pathFromRoot(root.right,l)
-		del l[-1]
+			return 0
+		pathsFromRoot = self.countPathsWithSumFromNode(root,0)
+		left = self.pathFromNode(root.left)
+		right = self.pathFromNode(root.right)
+
+		return pathsFromRoot + left + right
 	
-	def checkPath(self,l):
-		cnt = 0
-		print(l)
-		return cnt
+	# implements sliding window algorithm to find the path
+	def countPathsWithSumFromNode(self,node,currentSum):
+		if(node == None):
+			return 0
+		
+		currentSum += node.data
+		totalPath = 0
+		if(currentSum == self.key):
+			totalPath += 1
+
+		totalPath += self.countPathsWithSumFromNode(node.left,currentSum)
+		totalPath += self.countPathsWithSumFromNode(node.right,currentSum)
+
+		return totalPath
+
+	def printPath(self):
+		print(self.path)
+
 
 
 if __name__ == '__main__':
 	treeRootObject = tree()
-	nodes = [5,3,1,-2,0,-1,10]
+	nodes = [5,3,1,-2,0,-1,5]
 	treeRootObject.insertInOrder(nodes)
-	treeRootObject.printLevelOrder(treeRootObject.root)
-	treeRootObject.pathFromRoot(treeRootObject.root,[])
+	treeRootObject.key = 6
+	# treeRootObject.printLevelOrder(treeRootObject.root)
+	# treeRootObject.pathFromRoot(treeRootObject.root,[])
+	print(treeRootObject.pathFromNode(treeRootObject.root))
