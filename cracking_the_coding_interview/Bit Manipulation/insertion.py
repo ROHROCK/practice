@@ -14,7 +14,27 @@
 
 if __name__ == '__main__':
     standard_input = "10000000000 \n 10011 \n 2 6"
-    m = int(input())
-    n = int(input())
+    n = input()
+    m = int(input(),2)
     i,j = map(int,input().split())
-    print(12 & 13)
+    # to print data in binary format
+    # step 1 -> clear the bits in position j to i so create a mask
+    mask = int("1" * len(n),2) # create all 1's
+    leftside = (mask << j+1) & 0xffffffff # this helps to mask 32 bit data
+    rightside = ((1 << i) - 1)
+    n = int(n,2)
+
+    print('N --> {:b}'.format(n,'b'))
+    print('M --> {:b}'.format(m,'b'))
+
+    mask = leftside | rightside
+    print('Mask -> {:b}'.format(mask,'b'))
+
+    n_cleared = n & mask
+    print('{:b}'.format(n_cleared,'b'))
+
+    # moving m in to correct position
+    m = m << i
+
+    # oring both m and n to get the answer
+    print("Answer -> {:b}".format(m|n,'b'))
