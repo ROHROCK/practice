@@ -9,7 +9,7 @@ if __name__ == '__main__':
     realNumber = float(realNumber)
     if(realNumber < 0 or realNumber > 1):
         print("Error")
-    print(realNumber)
+    # print(realNumber)
     ans = "."
     # also a correct solution
     # while(realNumber > 0):
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     #         realNumber = res
     frac = 0.5
     while(realNumber > 0):
-        if(len(str(realNumber)) >= 32):
+        if(len(str(ans)) >= 33):
             print("Exceeded 32 bit")
             break
         if(realNumber >= frac):
