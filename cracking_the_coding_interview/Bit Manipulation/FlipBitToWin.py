@@ -4,14 +4,16 @@
 # Input: 1775
 # Output: 8
 # (or: 11011101111)
+# Time complexity : O(b)
+# Space complexity : O(1)
 standard_input = "11011101111"
 binary = int(input(),2)
-print("Entered {:b}".format(binary))
+# print("Entered {:b}".format(binary))
 currentLength = 0
 prevLength = 0
 maxLength = 0
 while(binary != 0):
-    print("{:b}".format(binary))
+    # print("{:b}".format(binary))
     if((binary & 1) == 1):
         currentLength += 1
     elif((binary & 1) == 0):
