@@ -11,15 +11,27 @@ if __name__ == '__main__':
         print("Error")
     print(realNumber)
     ans = "."
+    # also a correct solution
+    # while(realNumber > 0):
+    #     if(len(str(realNumber)) >= 32):
+    #         print("Exceeded 32 bit")
+    #         break
+    #     res = realNumber * 2
+    #     if(res >= 1):
+    #         ans += "1"
+    #         realNumber -= 1
+    #     else:
+    #         ans += "0"
+    #         realNumber = res
+    frac = 0.5
     while(realNumber > 0):
         if(len(str(realNumber)) >= 32):
             print("Exceeded 32 bit")
             break
-        res = realNumber * 2
-        if(res > 1):
+        if(realNumber >= frac):
             ans += "1"
-            realNumber -= 1
+            realNumber -= frac
         else:
             ans += "0"
-            realNumber = res
+        frac /= 2
     print(ans)
